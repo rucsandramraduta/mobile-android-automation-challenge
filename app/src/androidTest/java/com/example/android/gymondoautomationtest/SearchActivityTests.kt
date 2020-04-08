@@ -13,8 +13,6 @@ import org.junit.Assert.assertEquals
 import org.junit.Rule
 import org.junit.Test
 
-typealias VH = ListActivity.MyAdapter.MyViewHolder
-
 class SearchActivityTests {
 
     @get:Rule
@@ -39,6 +37,7 @@ class SearchActivityTests {
         onView(withId(R.id.btnSearch)).perform(click())
         onView(withId(R.id.recycler_view))
             .check(matches(hasDescendant(withText("436 - 10 Min Abs"))))
+
     }
 
 
@@ -49,7 +48,9 @@ class SearchActivityTests {
         onView(withId(R.id.btnSearch)).perform(click())
         onView(withId(R.id.recycler_view))
             .check(matches(hasDescendant(withText("573 - Awesome"))))
+
     }
+
 
     @Test
     // Perform search of a non existing workout name
@@ -58,16 +59,9 @@ class SearchActivityTests {
         onView(withId(R.id.btnSearch)).perform(click())
         onView(withId(R.id.recycler_view))
             .check(matches(hasChildCount(0)))
+
     }
 
-
-    /*@Test
-    fun searchForWorkoutWithSpecialCharacters() {
-        onView(withId(R.id.editTxtSearch)).perform(typeText("ä"))
-        onView(withId(R.id.btnSearch)).perform(click())
-        onView(withId(R.id.recycler_view))
-            .check(matches(hasDescendant(withText("434 - Armhävning"))))
-    }*/
 
     @Test
     // Test the functionality of the clear button
@@ -78,6 +72,7 @@ class SearchActivityTests {
 
     }
 
+
     @Test
     // Alternative method to search for a workout
     fun searchForWorkout() {
@@ -87,5 +82,6 @@ class SearchActivityTests {
 
         val firstElementView = activityRule.activity.recycler_view.children.toList()[0]
         assertEquals("436 - 10 Min Abs", firstElementView.item_text.text)
+
     }
 }

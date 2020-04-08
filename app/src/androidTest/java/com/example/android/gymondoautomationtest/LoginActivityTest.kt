@@ -1,8 +1,6 @@
 package com.example.android.gymondoautomationtest
 
 
-import android.content.Context
-import android.net.wifi.WifiManager
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.*
 import androidx.test.espresso.assertion.ViewAssertions.matches
@@ -14,11 +12,12 @@ import org.hamcrest.Matchers.not
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import java.util.concurrent.TimeUnit
 
 
 @RunWith(AndroidJUnit4::class)
+
 class LoginActivityTest {
+
     @get:Rule
     var activityRule: ActivityTestRule<MainActivity> = ActivityTestRule(MainActivity::class.java)
 
@@ -33,6 +32,8 @@ class LoginActivityTest {
         onView(withId(R.id.btnClear)).check(matches(isDisplayed()))
 
     }
+
+
     @Test
     // Perform login using no credentials
     fun logInWithNoCredentials() {
@@ -43,6 +44,7 @@ class LoginActivityTest {
 
     }
 
+
     @Test
     // Perform login using e-mail only
     fun logInWithEmailOnly() {
@@ -51,7 +53,9 @@ class LoginActivityTest {
         onView(withText("Username and/or password incorrect"))
             .inRoot(withDecorView(not(activityRule.activity.window.decorView)))
             .check(matches(isDisplayed()))
+
     }
+
 
     @Test
     // Perform login using password only
@@ -61,7 +65,9 @@ class LoginActivityTest {
         onView(withText("Username and/or password incorrect"))
             .inRoot(withDecorView(not(activityRule.activity.window.decorView)))
             .check(matches(isDisplayed()))
+
     }
+
 
     @Test
     // Perform login using valid email (existing user) and invalid password
@@ -72,7 +78,9 @@ class LoginActivityTest {
         onView(withText("Username and/or password incorrect"))
             .inRoot(withDecorView(not(activityRule.activity.window.decorView)))
             .check(matches(isDisplayed()))
+
     }
+
 
     @Test
     // Perform login using invalid email format and valid password
@@ -86,19 +94,13 @@ class LoginActivityTest {
 
     }
 
+
     @Test
     // Check that e-mail and password fields have expected hint
     fun checkEmailPassFields() {
         onView(withId(R.id.editText)).check(matches(withHint("Enter e-mail here")))
         onView(withId(R.id.editText2)).check(matches(withHint("Enter password here")))
+
     }
 
-
-    /*@Test
-    // Perform login while having no internet connection
-    fun noInternetLogIn() {
-        val context = activityRule.activity.applicationContext
-        val wifiManager = context.getSystemService(Context.WIFI_SERVICE) as WifiManager
-        wifiManager.isWifiEnabled = false
-    }*/
 }
